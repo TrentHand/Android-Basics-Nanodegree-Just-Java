@@ -29,18 +29,37 @@ public class MainActivity extends ActionBarActivity {
      * This method is called when the order button is clicked.
      */
     public void submitOrder(View view) {
-        String priceMessage = "Total = $" + (quantity * 5);
-        priceMessage = priceMessage + "\nThank you!";
+        int price = calculatePrice();
+        String priceMessage = createOrderSummary(price);
         displayMessage (priceMessage);
+
+
 
     }
 
+    private String createOrderSummary(int price){
+        String priceMessage = "Name: Kaptain Kunal";
+        priceMessage = priceMessage + "\nQuantity " + quantity;
+        priceMessage = "\nTotal = $" + price;
+        priceMessage = priceMessage + "\nThank you!";
+        return priceMessage;
+
+    }
+    /**
+     * Calculates the price of the order.
+     * @return displays the total price
+     */
+    private int calculatePrice() {
+        int price = quantity * 5;
+        return price;
+
+    }
     /**
      * This method is called when the + button is clicked.
      */
     public void increment(View view) {
         quantity = quantity + 1;
-        display(quantity);
+        displayQuantity(quantity);
     }
 
     /**
@@ -48,16 +67,16 @@ public class MainActivity extends ActionBarActivity {
      */
     public void decrement(View view) {
         quantity = quantity - 1;
-        display(quantity);
+        displayQuantity(quantity);
     }
 
     /**
      * This method displays the given quantity value on the screen.
      */
-    private void display(int number) {
+    private void displayQuantity(int amount) {
         TextView quantityTextView = (TextView) findViewById(
                 R.id.quantity_text_view);
-        quantityTextView.setText("" + number);
+        quantityTextView.setText("" + amount);
     }
 
     /**
